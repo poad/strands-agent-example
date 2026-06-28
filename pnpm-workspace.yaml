@@ -1,0 +1,26 @@
+packages:
+  - .
+  - ./agent
+  - ./deploy-role
+
+allowBuilds:
+  esbuild: false
+  protobufjs: false
+  unrs-resolver: false
+
+blockExoticSubdeps: true
+
+minimumReleaseAge: 10080 # 7 days in minutes
+
+minimumReleaseAgeExclude:
+  - pnpm@11.9.0
+  - nanoid@3.3.15
+
+overrides:
+  eslint-import-resolver-typescript: '^4.4.5'
+  nanoid: '>=3.3.15'
+  semver: '>=7'
+
+strictPeerDependencies: false
+
+trustPolicy: no-downgrade
