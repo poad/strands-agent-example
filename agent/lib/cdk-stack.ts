@@ -47,6 +47,7 @@ export class CloudfrontCdnTemplateStack extends cdk.Stack {
         DATABRICKS_UC_SCHEMA_NAME: databricksUcSchemaName,
         DATABRICKS_UC_TABLE_PREFIX: databricksUcTablePrefix,
         ENABLE_TRACING: 'true',
+        OTEL_SEMCONV_STABILITY_OPT_IN: 'gen_ai_latest_experimental,gen_ai_tool_definitions',
       },
       bundling: {
         target: 'node24',

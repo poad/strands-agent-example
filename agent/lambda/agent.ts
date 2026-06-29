@@ -20,7 +20,7 @@ if (exporters.trace) {
   });
 }
 
-const createAgent = ({ model: modelId }: { model: string }) => {
+const createAgent = ({ model: modelId, session, user = 'anonymous' }: { model: string, session: string, user: string }) => {
   const model = new BedrockModel({
     region: 'us-east-1',
     modelId: modelId,
@@ -39,10 +39,11 @@ const createAgent = ({ model: modelId }: { model: string }) => {
       - When proposing architectures, provide multiple patterns whenever possible
       - Respond in the same language as the question
       - Keep responses concise yet informative
-      - When returning Markdown, ensure it passes markdownlint-cli validation without warnings
-      - For non-AWS information, use Context7 to resolve queries with up-to-date information
-          - If Context7 cannot resolve the query, clearly state that you don't know
 `,
+    traceAttributes: {
+      'session.id': session,
+      'user.id': user,
+    },
     tools,
     printer: false,
   });
