@@ -20,7 +20,7 @@ if (exporters.trace) {
   });
 }
 
-const createAgent = ({ model: modelId, session, user = 'anonymous' }: { model: string, session: string, user: string }) => {
+const createAgent = ({ model: modelId, session, user = 'anonymous' }: { model: string, session: string, user?: string }) => {
   const model = new BedrockModel({
     region: 'us-east-1',
     modelId: modelId,

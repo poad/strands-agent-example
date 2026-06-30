@@ -6,8 +6,9 @@ export const handle = async (
   {
     message: message = 'こんにちは！',
     model: model = 'us.amazon.nova-micro-v1:0',
-  }: { message: string, model: string }, output: NodeJS.WritableStream) => {
-  const agent = createAgent({ model });
+    session,
+  }: { message: string, model: string, session: string }, output: NodeJS.WritableStream) => {
+  const agent = createAgent({ model, session });
   try {
     for await (const event of agent.stream(message)) {
       // logger.trace('[Event]', event.type);
@@ -30,8 +31,8 @@ export const handler = awslambda.streamifyResponse(
     event: APIGatewayProxyEvent, responseStream: NodeJS.WritableStream,
   ) => {
     logger.debug('event', { event });
-    const { message, model } = event.body ? JSON.parse(event.body) : {};
-    await handle({ message, model }, responseStream);
+    const { message, model, session } = event.body ? JSON.parse(event.body) : {};
+    await handle({ message, model, session }, responseStream);
     responseStream.end();
   });
 

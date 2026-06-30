@@ -18,6 +18,6 @@ test.runIf(isDefinedModel)('test', { retry: 0 }, async () => {
   const output = process.env.DISABLE_STDOUT === 'true' ? new PassThrough() : stdout;
   const message = process.env.QUESTION && process.env.QUESTION.length > 0 ? process.env.QUESTION : 'あなたは誰？質問と同じ言語で答えてください。';
 
-  await handle({message, model}, output);
+  await handle({message, model, session: 'test'}, output);
   await sleep(2000);
 });
